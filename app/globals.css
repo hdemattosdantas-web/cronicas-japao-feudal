@@ -1,26 +1,543 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
 @import "tailwindcss";
 
+/* ===================================================
+   PALETA DE CORES - CRÔNICAS HISTÓRICAS
+   =================================================== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ===================================================
+     PALETA DE CORES - CRÔNICAS HISTÓRICAS
+     =================================================== */
+
+  /* Fundo e superfícies */
+  --coal-black: #0a0a0a;           /* Preto carvão profundo */
+  --ancient-paper: #f4f1e8;        /* Papel antigo cremoso */
+  --parchment-dark: #e8dcc0;       /* Pergaminho escuro */
+  --ink-black: #1a1a1a;            /* Preto para texto principal */
+
+  /* Texto sobre fundo escuro */
+  --text-light: #ffffff;           /* Branco puro para títulos */
+  --text-cream: #f4f1e8;           /* Creme antigo para texto */
+  --text-gold: #a08b5c;            /* Ouro muito opaco - moderação */
+
+  /* Destaques mínimos - CRÔNICAS ANTIGAS */
+  --gold-dulled: #a08b5c;          /* Ouro muito opaco - usado com moderação */
+  --red-dark: #5c3d2e;             /* Marrom avermelhado escuro */
+
+  /* Bordas históricas */
+  --border-light: #d4c5a9;         /* Bordas de pergaminho */
+  --border-dark: #8b7355;          /* Bordas envelhecidas */
+
+  /* Sombras sutis */
+  --shadow-primary: rgba(160, 139, 92, 0.08);
+  --shadow-secondary: rgba(139, 115, 85, 0.05);
+
+  /* Sombras para texto sobre fundo escuro */
+  --text-shadow-dark: 0 1px 4px rgba(0, 0, 0, 0.7);
+  --text-shadow-gold: 0 1px 3px rgba(160, 139, 92, 0.4);
+
+  /* Background images */
+  --bg-feudal: url('/images/feudal-bg.jpeg');
+  --bg-map: url('/images/japan-map-bg.jpeg');
+
+  /* Gradientes históricos */
+  --gradient-paper: linear-gradient(135deg, #f4f1e8 0%, #e8dcc0 100%);
+  --gradient-dark: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+
+  /* ===================================================
+     TIPOGRAFIA - HIERARQUIA HISTÓRICA
+     =================================================== */
+
+  /* Fontes base */
+  --font-title: 'Cinzel', serif;
+  --font-narrative: 'Libre Baskerville', serif;
+  --font-interface: 'Inter', sans-serif;
+
+  /* Tamanhos tipográficos */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 3.75rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ===================================================
+   CSS RESET E BASE
+   =================================================== */
+
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--coal-black);
+  color: var(--coal-black);
+  font-family: var(--font-narrative);
+  font-size: var(--text-base);
+  line-height: 1.7;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===================================================
+   BACKGROUND THEMES
+   =================================================== */
+
+.bg-feudal {
+  background: var(--bg-feudal) no-repeat center center fixed;
+  background-size: cover;
+  background-color: var(--coal-black);
+}
+
+.bg-map {
+  background: var(--bg-map) no-repeat center center;
+  background-size: cover;
+}
+
+/* ===================================================
+   CLASSES DE TIPOGRAFIA
+   =================================================== */
+
+/* Títulos - Cinzel - PESO HISTÓRICO */
+.title-hero {
+  font-family: var(--font-title);
+  font-size: var(--text-6xl);
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  line-height: 1.05;
+  color: var(--coal-black);
+  text-shadow: none;
+}
+
+.title-section {
+  font-family: var(--font-title);
+  font-size: var(--text-5xl);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  color: var(--coal-black);
+  text-shadow: none;
+}
+
+.title-card {
+  font-family: var(--font-title);
+  font-size: var(--text-3xl);
+  font-weight: 500;
+  letter-spacing: 0.015em;
+  line-height: 1.2;
+  color: var(--text-gold);
+  text-shadow: var(--text-shadow-gold);
+}
+
+/* Textos narrativos - Libre Baskerville - ALTO CONFORT */
+.narrative-lead {
+  font-family: var(--font-narrative);
+  font-size: var(--text-lg);
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--coal-black);
+  max-width: 65ch;
+  text-shadow: none;
+}
+
+.narrative-body {
+  font-family: var(--font-narrative);
+  font-size: var(--text-base);
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--coal-black);
+  text-shadow: none;
+}
+
+.narrative-italic {
+  font-family: var(--font-narrative);
+  font-size: var(--text-base);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--coal-black);
+  opacity: 0.95;
+  text-shadow: none;
+}
+
+/* Interface - Inter */
+.interface-label {
+  font-family: var(--font-interface);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--coal-black);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.9;
+  text-shadow: none;
+}
+
+.interface-body {
+  font-family: var(--font-interface);
+  font-size: var(--text-base);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--coal-black);
+  text-shadow: none;
+}
+
+.interface-small {
+  font-family: var(--font-interface);
+  font-size: var(--text-sm);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--coal-black);
+  opacity: 0.85;
+  text-shadow: none;
+}
+
+/* ===================================================
+   COMPONENTES BASE
+   =================================================== */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Header e Navigation */
+.header-overlay {
+  background: rgba(10, 10, 10, 0.92);
+  border-bottom: 1px solid rgba(212, 197, 169, 0.4);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+}
+
+.nav-link {
+  color: var(--coal-black);
+  text-shadow: none;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--text-gold);
+  text-shadow: none;
+}
+
+/* Footer */
+.footer-overlay {
+  background: rgba(10, 10, 10, 0.95);
+  border-top: 1px solid rgba(212, 197, 169, 0.3);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+.card {
+  background: rgba(244, 241, 232, 0.92);
+  border: 1px solid rgba(212, 197, 169, 0.4);
+  border-radius: 4px;
+  padding: 2rem;
+  margin: 1.5rem 0;
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.2),
+    0 1px 4px rgba(139, 115, 85, 0.1);
+  position: relative;
+}
+
+.parchment {
+  background: rgba(232, 220, 192, 0.82);
+  border: 1px solid rgba(139, 115, 85, 0.5);
+  border-radius: 2px;
+  padding: 1.5rem;
+  box-shadow:
+    0 3px 12px rgba(0, 0, 0, 0.15),
+    inset 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.scroll {
+  background: rgba(244, 241, 232, 0.88);
+  border: 1px solid rgba(212, 197, 169, 0.5);
+  border-radius: 4px;
+  padding: 2rem;
+  margin: 1rem 0;
+  box-shadow:
+    0 6px 24px rgba(0, 0, 0, 0.25),
+    0 2px 6px rgba(139, 115, 85, 0.12);
+  position: relative;
+}
+
+.scroll::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 8px;
+  background: var(--coal-black);
+  border-radius: 4px 4px 0 0;
+  opacity: 0.3;
+}
+
+/* ===================================================
+   FORMULÁRIOS E INPUTS
+   =================================================== */
+
+input, select, textarea {
+  background: var(--ancient-paper);
+  border: 2px solid var(--border-light);
+  border-radius: 6px;
+  color: var(--ink-black);
+  padding: 0.875rem 1rem;
+  font-family: var(--font-interface);
+  font-size: var(--text-base);
+  font-weight: 400;
+  line-height: 1.5;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.05),
+    0 0 0 3px rgba(184, 134, 11, 0.1);
+  background: var(--parchment-dark);
+}
+
+/* ===================================================
+   BOTÕES - ESTILO HISTÓRICO
+   =================================================== */
+
+.btn-primary {
+  background: var(--gold-dulled);
+  border: 1px solid var(--gold-dulled);
+  border-radius: 4px;
+  color: var(--ancient-paper);
+  padding: 0.875rem 2rem;
+  font-family: var(--font-interface);
+  font-size: var(--text-base);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.btn-primary:hover {
+  background: var(--coal-black);
+  border-color: var(--gold-dulled);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px var(--shadow-primary);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: rgba(244, 241, 232, 0.08);
+  border: 1px solid rgba(212, 197, 169, 0.5);
+  border-radius: 4px;
+  color: var(--text-cream);
+  padding: 0.875rem 2rem;
+  font-family: var(--font-interface);
+  font-size: var(--text-base);
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.btn-secondary:hover {
+  background: rgba(232, 220, 192, 0.15);
+  border-color: var(--text-gold);
+  color: var(--text-gold);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(160, 139, 92, 0.2);
+}
+
+/* ===================================================
+   UPLOAD DE IMAGENS
+   =================================================== */
+
+.image-upload-container {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border: 2px dashed var(--border-light);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  background: var(--ancient-paper);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.image-upload-container:hover {
+  border-color: var(--accent-primary);
+  background: var(--parchment-dark);
+  transform: scale(1.02);
+}
+
+.image-upload-container.has-image {
+  border-style: solid;
+  box-shadow: 0 4px 8px var(--shadow-primary);
+}
+
+.image-upload-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.upload-placeholder {
+  text-align: center;
+  color: var(--ink-black);
+  opacity: 0.7;
+}
+
+.upload-placeholder i {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  display: block;
+  color: var(--border-dark);
+}
+
+.character-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent-primary);
+  box-shadow: 0 4px 8px var(--shadow-primary);
+}
+
+/* ===================================================
+   ANIMAÇÕES E TRANSITIONS
+   =================================================== */
+
+.fade-in {
+  animation: fadeIn 0.8s ease-out;
+}
+
+.fade-in-slow {
+  animation: fadeIn 1.2s ease-out;
+}
+
+.slide-up {
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===================================================
+   UTILITÁRIOS
+   =================================================== */
+
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.font-title { font-family: var(--font-title); }
+.font-narrative { font-family: var(--font-narrative); }
+.font-interface { font-family: var(--font-interface); }
+
+.text-gold { color: var(--accent-primary); }
+.text-red { color: var(--accent-secondary); }
+.text-muted { opacity: 0.7; }
+
+.bg-paper { background: var(--ancient-paper); }
+.bg-coal { background: var(--coal-black); }
+
+.shadow-parchment {
+  box-shadow:
+    0 4px 6px var(--shadow-primary),
+    0 1px 3px var(--shadow-secondary);
+}
+
+.shadow-scroll {
+  box-shadow:
+    0 8px 16px var(--shadow-primary),
+    0 2px 4px var(--shadow-secondary);
+}
+
+/* ===================================================
+   RESPONSIVIDADE
+   =================================================== */
+
+@media (max-width: 768px) {
+  .title-hero {
+    font-size: var(--text-4xl);
+  }
+
+  .title-section {
+    font-size: var(--text-3xl);
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .card, .scroll {
+    padding: 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .btn-primary, .btn-secondary {
+    padding: 0.75rem 1.5rem;
+    font-size: var(--text-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .title-hero {
+    font-size: var(--text-3xl);
+  }
+
+  .title-section {
+    font-size: var(--text-2xl);
+  }
+
+  .card, .scroll {
+    padding: 1rem;
+  }
 }

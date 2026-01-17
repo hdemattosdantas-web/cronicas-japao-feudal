@@ -1,0 +1,260 @@
+{
+  "id": "jornada-inicial",
+  "title": "A Jornada Começa",
+  "description": "Sua primeira jornada como um habitante do Japão feudal. Explore a vila, conheça pessoas e descubra os primeiros sinais do mundo espiritual que se esconde nas sombras.",
+  "startingSceneId": "vila-acordar",
+  "difficulty": "easy",
+  "estimatedHours": 1,
+  "tags": ["introdução", "vila", "conhecimento", "exploração"],
+  "scenes": [
+    {
+      "id": "vila-acordar",
+      "title": "O Despertar",
+      "description": "Você acorda em sua casa simples na vila de Owari. O sol da manhã entra pelas frestas da parede de madeira. É hora de começar mais um dia.",
+      "narration": "O canto dos pássaros anuncia o início de mais um dia na vila. Você se levanta lentamente, sentindo o peso dos anos nas costas. Há algo diferente no ar hoje - uma energia sutil que você não consegue identificar.",
+      "location": "Casa simples em Owari",
+      "timeOfDay": "morning",
+      "weather": "clear",
+      "choices": [
+        {
+          "id": "levantar-trabalhar",
+          "text": "Levantar e ir trabalhar nos campos",
+          "nextSceneId": "campos-trabalho",
+          "requirements": {
+            "profession": ["Camponês"]
+          },
+          "consequences": {
+            "experience": 5
+          }
+        },
+        {
+          "id": "levantar-explorar",
+          "text": "Sair para explorar a vila",
+          "nextSceneId": "vila-centro",
+          "consequences": {
+            "experience": 3
+          }
+        },
+        {
+          "id": "meditar",
+          "text": "Passar um tempo meditando sobre a vida",
+          "nextSceneId": "reflexao-interior",
+          "requirements": {
+            "profession": ["Monge budista", "Sacerdote xintoísta"]
+          },
+          "consequences": {
+            "attributeChanges": {
+              "vontade": 1
+            },
+            "experience": 8
+          }
+        }
+      ],
+      "npcs": [
+        {
+          "id": "vizinho-taro",
+          "name": "Taro, o Vizinho",
+          "description": "Um homem idoso que vive na casa ao lado há décadas.",
+          "dialogue": [
+            "Bom dia! O dia está bonito para trabalhar na terra.",
+            "Ouvi estranhos sons vindos da floresta ontem à noite...",
+            "Você parece preocupado. Algum problema?"
+          ],
+          "attitude": "friendly",
+          "profession": "Camponês"
+        }
+      ]
+    },
+    {
+      "id": "campos-trabalho",
+      "title": "Trabalhando nos Campos",
+      "description": "Você trabalha duro nos campos de arroz, sentindo a terra úmida sob seus pés. O trabalho é árduo, mas traz uma satisfação profunda.",
+      "narration": "As mãos calejadas guiam a enxada com precisão. Cada movimento é ritmado, como uma dança antiga passada de geração em geração. Mas hoje... há algo diferente. Uma presença invisível observa seu trabalho.",
+      "location": "Campos de arroz em Owari",
+      "timeOfDay": "morning",
+      "weather": "clear",
+      "choices": [
+        {
+          "id": "continuar-trabalho",
+          "text": "Continuar trabalhando até o almoço",
+          "nextSceneId": "descanso-almoco",
+          "consequences": {
+            "attributeChanges": {
+              "corpo": 1
+            },
+            "experience": 10
+          }
+        },
+        {
+          "id": "descansar-sombra",
+          "text": "Fazer uma pausa à sombra de uma árvore",
+          "nextSceneId": "descoberta-floresta",
+          "consequences": {
+            "experience": 5
+          }
+        },
+        {
+          "id": "ouvir-sons",
+          "text": "Prestar atenção aos estranhos sons vindos da floresta",
+          "nextSceneId": "encontro-misterioso",
+          "requirements": {
+            "attribute": "percepção",
+            "minValue": 5
+          },
+          "consequences": {
+            "experience": 15
+          }
+        }
+      ]
+    },
+    {
+      "id": "vila-centro",
+      "title": "Centro da Vila",
+      "description": "O centro da vila está movimentado. Mercadores oferecem seus produtos, crianças brincam, e os anciãos conversam sobre os velhos tempos.",
+      "narration": "O coração pulsante da vila. Mercadores gritam oferecendo mercadorias, o cheiro de comida fresca paira no ar. Mas em meio à vida cotidiana, você sente que algo antigo e poderoso observa silenciosamente.",
+      "location": "Centro da vila de Owari",
+      "timeOfDay": "morning",
+      "weather": "clear",
+      "choices": [
+        {
+          "id": "falar-mercador",
+          "text": "Conversar com o mercador ambulante",
+          "nextSceneId": "mercador-historia",
+          "consequences": {
+            "experience": 8
+          }
+        },
+        {
+          "id": "visitar-templo",
+          "text": "Visitar o pequeno templo xintoísta",
+          "nextSceneId": "templo-reflexao",
+          "consequences": {
+            "attributeChanges": {
+              "vontade": 1
+            },
+            "experience": 12
+          }
+        },
+        {
+          "id": "observar-criancas",
+          "text": "Observar as crianças brincando",
+          "nextSceneId": "criancas-misterio",
+          "consequences": {
+            "experience": 6
+          }
+        }
+      ],
+      "npcs": [
+        {
+          "id": "mercador-hiroshi",
+          "name": "Hiroshi, o Mercador",
+          "description": "Um mercador ambulante sempre com novidades de outras vilas.",
+          "dialogue": [
+            "Bem-vindo! Tenho mercadorias de Kyoto e Edo!",
+            "Ouvi rumores de estranhas luzes nas montanhas...",
+            "Interessado em alguma coisa especial?"
+          ],
+          "attitude": "friendly",
+          "profession": "Mercador",
+          "canTrade": true
+        },
+        {
+          "id": "monja-akiko",
+          "name": "Akiko, a Monja",
+          "description": "Uma monja budista que ajuda no templo local.",
+          "dialogue": [
+            "Que a paz esteja com você.",
+            "Sinto uma energia diferente no ar hoje...",
+            "Talvez seja hora de refletir sobre o caminho espiritual."
+          ],
+          "attitude": "mysterious",
+          "profession": "Monge budista"
+        }
+      ]
+    },
+    {
+      "id": "reflexao-interior",
+      "title": "Reflexão Interior",
+      "description": "Você se senta em meditação, focando na respiração e nos pensamentos que fluem como um rio tranquilo.",
+      "narration": "No silêncio da meditação, você percebe algo que antes passava despercebido. Uma energia sutil flui através de tudo - conectando pessoas, animais, plantas. É como se o mundo espiritual estivesse se revelando aos poucos.",
+      "location": "Casa simples em Owari",
+      "timeOfDay": "morning",
+      "weather": "clear",
+      "choices": [
+        {
+          "id": "continuar-meditacao",
+          "text": "Continuar meditando por mais tempo",
+          "nextSceneId": "visao-espiritual",
+          "consequences": {
+            "attributeChanges": {
+              "percepção": 1,
+              "vontade": 2
+            },
+            "experience": 20
+          }
+        },
+        {
+          "id": "terminar-meditacao",
+          "text": "Terminar a meditação e ir para a vila",
+          "nextSceneId": "vila-centro",
+          "consequences": {
+            "attributeChanges": {
+              "vontade": 1
+            },
+            "experience": 10
+          }
+        }
+      ]
+    },
+    {
+      "id": "visao-espiritual",
+      "title": "Primeira Visão",
+      "description": "Durante a meditação profunda, você tem uma visão espiritual. Figuras etéreas dançam na luz, revelando segredos antigos.",
+      "narration": "De repente, o mundo muda. Figuras translúcidas aparecem - espíritos da natureza, kami antigos, energias primordiais. Eles sussurram segredos há muito esquecidos. Você sente que algo dentro de você despertou... seu caminho espiritual está apenas começando.",
+      "location": "Casa simples em Owari",
+      "timeOfDay": "morning",
+      "weather": "clear",
+      "choices": [
+        {
+          "id": "aceitar-visao",
+          "text": "Aceitar esta nova percepção do mundo",
+          "nextSceneId": "conclusao-despertar",
+          "consequences": {
+            "attributeChanges": {
+              "percepção": 2,
+              "vontade": 1
+            },
+            "experience": 50,
+            "flags": {
+              "espiritual_awakened": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "conclusao-despertar",
+      "title": "O Despertar",
+      "description": "Sua jornada está apenas começando. O mundo espiritual se revelou, e você sabe que há muito mais a descobrir.",
+      "narration": "Você se levanta renovado. O mundo parece mais vivo, mais conectado. Os espíritos sussurram promessas de aventuras futuras. Sua jornada como um ser espiritual consciente começou hoje.",
+      "location": "Casa simples em Owari",
+      "timeOfDay": "afternoon",
+      "weather": "clear",
+      "choices": [
+        {
+          "id": "finalizar-jornada",
+          "text": "Continuar sua vida cotidiana com nova sabedoria",
+          "nextSceneId": "end_campaign",
+          "consequences": {
+            "experience": 25
+          }
+        }
+      ]
+    }
+  ],
+  "rewards": {
+    "experience": 100,
+    "items": [],
+    "unlocks": ["espiritual_awakened"]
+  }
+}

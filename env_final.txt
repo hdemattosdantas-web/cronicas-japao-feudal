@@ -1,0 +1,5 @@
+DATABASE_URL="file:./prisma/dev.db"
+NEXTAUTH_URL="http://localhost:3000"
+GOOGLE_CLIENT_ID="809396998033-c7fqmtrd2pf5jrjcjlaq2d094lr9so83.apps.googleusercontent.com"
+GOOGLE_CLIENT_SECRET="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"
+NEXTAUTH_SECRET="k8FJ3s7A9KxQmPp3L2D1E9zQnYtV0+0xRkA7mE2cQ="

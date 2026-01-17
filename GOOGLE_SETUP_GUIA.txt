@@ -1,0 +1,94 @@
+========================================
+🚀 CONFIGURAÇÃO GOOGLE OAUTH - GUIA VISUAL
+========================================
+
+🔗 LINK DIRETO: https://console.cloud.google.com/
+
+========================================
+📋 PASSO 1: CRIAR/SELECIONAR PROJETO
+========================================
+• Clique no seletor de projeto (canto superior esquerdo)
+• Clique em "Novo projeto"
+• Nome: "Cronicas-Japao-Feudal"
+• Organização: "Nenhuma organização"
+• Localização: "Não definido"
+• Clique "CRIAR"
+
+========================================
+📋 PASSO 2: ATIVAR GOOGLE+ API
+========================================
+• No menu lateral esquerdo: "APIs e Serviços" → "Biblioteca"
+• Na barra de pesquisa: digite "Google+ API"
+• Clique no resultado "Google+ API"
+• Clique no botão "ATIVAR" (azul)
+
+========================================
+📋 PASSO 3: CRIAR CREDENCIAIS OAUTH
+========================================
+• No menu lateral: "APIs e Serviços" → "Credenciais"
+• Clique em "+ CRIAR CREDENCIAIS"
+• Selecione: "ID do cliente OAuth"
+• Tipo de aplicativo: "Aplicação Web"
+• Nome: "Cronicas Japão Feudal Dev"
+
+========================================
+📋 PASSO 4: CONFIGURAR REDIRECIONAMENTO
+========================================
+• Em "URIs de redirecionamento autorizados":
+  Adicione: http://localhost:3000/api/auth/callback/google
+• Clique em "CRIAR"
+
+========================================
+📋 PASSO 5: COPIAR CREDENCIAIS
+========================================
+• Uma janela/modal aparecerá com:
+  • "Seu ID do cliente" (Client ID)
+  • "Sua chave secreta do cliente" (Client Secret)
+• COPIE estes valores!
+• Clique "OK"
+
+========================================
+📋 PASSO 6: ATUALIZAR .ENV.LOCAL
+========================================
+Execute o arquivo: setup-google-auth.bat
+Ou edite manualmente .env.local:
+
+DATABASE_URL="file:./prisma/dev.db"
+NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_SECRET="qualquer-chave-segura-aqui"
+GOOGLE_CLIENT_ID="SEU_CLIENT_ID_AQUI"
+GOOGLE_CLIENT_SECRET="SEU_CLIENT_SECRET_AQUI"
+
+========================================
+🎯 TESTE FINAL
+========================================
+1. Execute: npm run dev
+2. Acesse: http://localhost:3000/auth/signin
+3. Clique: "Continuar com Google"
+4. Faça login com sua conta Google
+5. Deve redirecionar de volta ao app
+
+========================================
+⚠️  DICAS IMPORTANTES
+========================================
+• O Client ID começa com números + ".googleusercontent.com"
+• O Client Secret é uma string longa aleatória
+• Mantenha essas chaves PRIVADAS!
+• Para produção, configure domínio real
+• O projeto Google Cloud é gratuito para uso básico
+
+========================================
+🆘 PROBLEMAS COMUNS
+========================================
+• "redirect_uri_mismatch": Verifique se a URI está exatamente igual
+• "invalid_client": Verifique Client ID e Secret
+• "access_denied": Tente outra conta Google ou reconfigure
+
+========================================
+✅ SUCESSO!
+========================================
+Após configurar, você verá:
+• Login/logout funcionando
+• Nome do usuário no cabeçalho
+• Acesso a "Criar Personagem"
+• Rotas protegidas funcionando

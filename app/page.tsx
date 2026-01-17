@@ -1,65 +1,128 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from 'react';
+import OnboardingModal from './components/OnboardingModal';
 
 export default function Home() {
+  const [showOnboarding, setShowOnboarding] = useState(false);
+
+  const handleStartJourney = () => {
+    setShowOnboarding(true);
+  };
+
+  const handleOnboardingComplete = () => {
+    setShowOnboarding(false);
+    window.location.href = '/character/create';
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="bg-feudal min-h-screen">
+      <div className="container fade-in">
+        <div className="scroll text-center">
+          <h1 className="title-hero mb-8 text-center">
+            Um Japão esquecido observa você.
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+
+          <div className="space-y-8">
+            <p className="narrative-italic text-center max-w-3xl mx-auto">
+              Nem todos os horrores vivem nos contos.<br />
+              Alguns caminham pelas estradas, se escondem nos templos<br />
+              e observam aqueles que ainda não despertaram.
+            </p>
+
+            <div className="space-y-6 max-w-4xl mx-auto">
+              <p className="narrative-body">
+                <strong className="font-title text-gold">Mesa Feudal</strong> é um RPG narrativo ambientado em um Japão feudal alternativo,
+                onde a vida cotidiana, o perigo humano e o sobrenatural coexistem em silêncio.
+              </p>
+
+              <p className="narrative-body">
+                Você começa como uma pessoa comum — camponês, mercador, monge, soldado —
+                sem saber que o mundo guarda algo além do visível.
+              </p>
+
+              <p className="narrative-body">
+                Conforme sua história se desenvolve, suas escolhas moldam seu corpo, sua mente
+                e sua percepção do oculto… até o dia em que você não pode mais fingir que não vê.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-12 space-y-6">
+            <button
+              onClick={handleStartJourney}
+              className="btn-primary block mx-auto"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              🏮 Começar Jornada
+            </button>
+
+            <p className="narrative-italic text-center">
+              Crie seu personagem. Viva. Sobreviva. Desperte.
+            </p>
+
+            <div className="text-center">
+              <span className="interface-small">Já é aventureiro? </span>
+              <button
+                onClick={() => window.location.href = '/auth/signin'}
+                className="text-gold hover:underline"
+              >
+                Fazer login
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="parchment">
+          <h2 className="title-section mb-8 text-center">
+            🕯️ O Que Aguarda Aqueles que Caminham
+          </h2>
+
+          <div className="space-y-8 max-w-4xl mx-auto">
+            <div className="space-y-4">
+              <h3 className="title-card text-center text-gold">🧭 Evolução Silenciosa</h3>
+              <p className="narrative-body text-center">
+                Nada acontece de uma vez.<br />
+                Cada decisão, rotina ou erro molda seu corpo, sua mente<br />
+                e aquilo que você será capaz de perceber.
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="title-card text-center" style={{ color: 'var(--coal-black)' }}>👤 Vidas Comuns</h3>
+              <p className="narrative-body text-center">
+                Você começa invisível para o mundo.<br />
+                Um rosto entre muitos. Nenhum destino escrito.<br />
+                Nenhuma proteção divina.
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="title-card text-center text-gold">⏳ O Peso do Tempo</h3>
+              <p className="narrative-body text-center">
+                Os anos passam. O corpo muda. Relações surgem e se desfazem.<br />
+                Você pode deixar filhos, histórias…<br />
+                ou marcas que nunca desaparecem.
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              <h3 className="title-card text-center text-red">🌑 Aquilo Que Não Deveria Ser Visto</h3>
+              <p className="narrative-body text-center">
+                Você não será avisado.<br />
+                Você não será preparado.<br />
+                Quando perceber que algo está errado, talvez já seja tarde.
+              </p>
+            </div>
+          </div>
         </div>
-      </main>
+
+        {showOnboarding && (
+          <OnboardingModal
+            onClose={() => setShowOnboarding(false)}
+            onContinue={handleOnboardingComplete}
+          />
+        )}
+      </div>
     </div>
   );
 }
