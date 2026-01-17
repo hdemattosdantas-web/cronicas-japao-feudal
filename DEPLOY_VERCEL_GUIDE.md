@@ -30,7 +30,7 @@ Adicione estas variáveis no Vercel:
 
 ```bash
 # Autenticação (OBRIGATÓRIAS)
-NEXTAUTH_URL=https://cronicas-japao-feudal-teste.vercel.app
+NEXTAUTH_URL=https://cronicas-japao-feudal-teste.vercel.app/
 NEXTAUTH_SECRET=k8FJ3s7A9KxQmPp3L2D1E9zQnYtV0+0xRkA7mE2cQ=
 
 # Google OAuth (OBRIGATÓRIAS)
