@@ -29,22 +29,40 @@
 Adicione estas variáveis no Vercel:
 
 ```bash
-# Autenticação
-NEXTAUTH_URL=https://seu-dominio.vercel.app
-NEXTAUTH_SECRET=sua-secret-segura-aqui
-GOOGLE_CLIENT_ID=seu-google-client-id
-GOOGLE_CLIENT_SECRET=seu-google-client-secret
+# Autenticação (OBRIGATÓRIAS)
+NEXTAUTH_URL=https://cronicas-japao-feudal-teste.vercel.app
+NEXTAUTH_SECRET=k8FJ3s7A9KxQmPp3L2D1E9zQnYtV0+0xRkA7mE2cQ=
+
+# Google OAuth (OBRIGATÓRIAS)
+GOOGLE_CLIENT_ID=809396998033-c7fqmtrd2pf5jrjcjlaq2d094lr9so83.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=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
 
 # Banco de Dados (SQLite na Vercel)
 DATABASE_URL=file:./prisma/dev.db
-
-# Email (opcional - para registro por email)
-EMAIL_SERVER_HOST=smtp.gmail.com
-EMAIL_SERVER_PORT=587
-EMAIL_SERVER_USER=seu-email@gmail.com
-EMAIL_SERVER_PASSWORD=sua-senha-app
-EMAIL_FROM=seu-email@gmail.com
 ```
+
+### 🚨 ERRO ATUAL - APPLICATION ERROR:
+
+**Se você está vendo esta mensagem:**
+```
+Application error: a server-side exception has occurred while loading cronicas-japao-feudal-teste.vercel.app
+```
+
+**É porque as variáveis de ambiente não estão configuradas!**
+
+#### Como Resolver Agora:
+
+1. **Acesse:** https://vercel.com/dashboard
+2. **Selecione:** `cronicas-japao-feudal-teste`
+3. **Settings → Environment Variables**
+4. **Adicione cada variável acima** exatamente como mostrado
+5. **Environment:** `Production`
+6. **Após adicionar:** Clique em **"Redeploy"** no topo da página
+
+#### Status Atual:
+- ❌ **API retorna 500** (variáveis faltando)
+- ✅ **Build funciona** localmente
+- 🔄 **Deploy pendente** de configuração
 
 ### 4. Configurar Domain (Opcional)
 
