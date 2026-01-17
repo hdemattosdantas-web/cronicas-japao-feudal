@@ -5,7 +5,7 @@ Um RPG de vida online ambientado no período Sengoku do Japão feudal, onde uma 
 ## 🌐 Deploy Online
 
 ### Vercel (Recomendado)
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/SEU_USERNAME/cronicas-japao-feudal)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/hdemattosdantas-web/cronicas-japao-feudal)
 
 **Deploy automático configurado!** Veja [DEPLOY_VERCEL_GUIDE.md](DEPLOY_VERCEL_GUIDE.md) para instruções completas.
 
