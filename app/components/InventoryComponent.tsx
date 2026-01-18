@@ -194,7 +194,7 @@ export function InventoryComponent({ characterId }: InventoryComponentProps) {
                     onClick={() => setSelectedSlot(equippedItem)}
                   >
                     <div className="flex items-center space-x-2">
-                      <span className="text-lg">{equippedItem.item?.icon || getCategoryIcon(equippedItem.item?.category || '')}</span>
+                      <span className="text-lg">{(equippedItem.item?.icon) || getCategoryIcon(equippedItem.item?.category || '')}</span>
                       <div className="flex-1">
                         <div className="font-medium text-sm">{equippedItem.item?.name}</div>
                         <div 
@@ -244,7 +244,7 @@ export function InventoryComponent({ characterId }: InventoryComponentProps) {
                 {slot ? (
                   <div className="h-full flex flex-col items-center justify-center">
                     <span className="text-2xl mb-1">
-                      {slot.item?.icon || getCategoryIcon(slot.item?.category || '')}
+                      {(slot.item?.icon) || getCategoryIcon(slot.item?.category || '')}
                     </span>
                     <div className="text-xs text-center font-medium truncate w-full">
                       {slot.item?.name}
@@ -278,7 +278,7 @@ export function InventoryComponent({ characterId }: InventoryComponentProps) {
           <div className="flex justify-between items-start mb-3">
             <div className="flex items-center space-x-3">
               <span className="text-3xl">
-                {selectedSlot.item.icon || getCategoryIcon(selectedSlot.item.category)}
+                {(selectedSlot.item.icon) || getCategoryIcon(selectedSlot.item.category)}
               </span>
               <div>
                 <h4 className="font-bold text-lg">{selectedSlot.item.name}</h4>

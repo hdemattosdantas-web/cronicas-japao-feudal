@@ -1,6 +1,7 @@
 import { promises as fs } from 'fs'
 import path from 'path'
 import { Campaign, GameState, Scene } from './types'
+import { gameMaster } from "@/lib/game-master/engine"
 
 const CAMPAIGNS_DIR = path.join(process.cwd(), 'data', 'campaigns')
 const GAME_STATES_DIR = path.join(process.cwd(), 'data', 'game-states')
@@ -106,6 +107,45 @@ export class CampaignManager {
       flags: {},
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
+    }
+
+    // Gerar boas-vindas personalizadas do Game Master
+    try {
+      // Criar instância do Game Master
+      const gmEngine = new (gameMaster as any)()
+      
+      // Usar método público existente para gerar boas-vindas
+      const welcomeMessage = await gmEngine.processPlayerAction(
+        gameState,
+        {
+          id: 'welcome-scene',
+          title: 'Bem-vindo a Crônicas do Japão',
+          description: 'O mestre saúda o novo aventureiro',
+          narration: '',
+          choices: [],
+          location: 'Owari',
+          timeOfDay: 'morning',
+          weather: 'clear',
+          mood: 'mysterious'
+        },
+        'iniciar_jornada',
+        'welcome'
+      )
+      
+      // Adicionar mensagem de boas-vindas ao estado
+      gameState.flags = {
+        ...gameState.flags,
+        welcomeMessage: welcomeMessage.narration,
+        welcomeMood: welcomeMessage.mood
+      }
+    } catch (error) {
+      console.warn('Erro ao gerar boas-vindas do Game Master:', error)
+      // Fallback para mensagem padrão
+      gameState.flags = {
+        ...gameState.flags,
+        welcomeMessage: `Bem-vindo a ${campaign.title}, aventureiro. Sua jornada começa agora...`,
+        welcomeMood: 'mysterious'
+      }
     }
 
     await this.saveGameState(gameState)

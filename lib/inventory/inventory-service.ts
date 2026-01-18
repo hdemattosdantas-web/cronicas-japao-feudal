@@ -16,8 +16,8 @@ interface Item {
   requirements?: any
   isStackable: boolean
   maxStack: number
-  icon?: string
-  professionSpecific?: string
+  icon?: string | null
+  professionSpecific?: string | null
   createdAt: Date
   updatedAt: Date
 }

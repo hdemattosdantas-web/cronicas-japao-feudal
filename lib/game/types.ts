@@ -53,6 +53,7 @@ export interface Item {
   value?: number;
   effects?: Record<string, number>;
   rarity?: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
+  icon?: string | null;
 }
 
 export interface GameEvent {
@@ -101,7 +102,7 @@ export interface GameState {
   activeQuests: string[];
   discoveredLocations: string[];
   reputation: Record<string, number>; // Relacionamento com facções/NPCs
-  flags: Record<string, boolean>; // Flags para condições especiais
+  flags: Record<string, boolean | string>; // Flags para condições especiais
   createdAt: string;
   updatedAt: string;
 }

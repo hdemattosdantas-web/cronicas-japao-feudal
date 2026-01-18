@@ -12,8 +12,8 @@ export interface Item {
   requirements?: any // requisitos para usar (nivel, atributos, profissão, etc)
   isStackable: boolean
   maxStack: number
-  icon?: string
-  professionSpecific?: string // profissão específica para este item
+  icon?: string | null
+  professionSpecific?: string | null // profissão específica para este item
   createdAt: Date
   updatedAt: Date
 }
