@@ -27,6 +27,7 @@
     "react-dom": "19.2.3",
     "socket.io": "^4.8.3",
     "socket.io-client": "^4.8.3",
+    "supabase": "^2.72.8",
     "ws": "^8.19.0"
   },
   "devDependencies": {

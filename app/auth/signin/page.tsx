@@ -42,8 +42,7 @@ export default async function SignInPage() {
         <div className="mt-6 p-4 rounded-lg text-xs opacity-60" style={{ backgroundColor: 'rgba(139, 69, 19, 0.05)' }}>
           <p>
             <strong>🎭 Sobre a Autenticação:</strong><br />
-            Seus dados são protegidos e criptografados. Você pode fazer login com sua conta Google
-            ou usar email e senha cadastrados.
+            Seus dados são protegidos e criptografados. Faça login usando email e senha cadastrados.
           </p>
         </div>
       </div>
