@@ -1,18 +1,67 @@
 import { NextAuthOptions } from "next-auth"
-import GoogleProvider from "next-auth/providers/google"
+import CredentialsProvider from "next-auth/providers/credentials"
 import EmailProvider from "next-auth/providers/email"
 import { PrismaAdapter } from "@auth/prisma-adapter"
+import { compare } from "bcryptjs"
 import { sendVerificationRequest } from "./email"
 import { prisma } from "@/lib/prisma"
 
 export const authOptions: NextAuthOptions = {
-  // adapter: PrismaAdapter(prisma), // Desabilitado temporariamente devido a problemas de configuração
+  adapter: PrismaAdapter(prisma),
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    CredentialsProvider({
+      name: "credentials",
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Senha", type: "password" }
+      },
+      async authorize(credentials) {
+        if (!credentials?.email || !credentials?.password) {
+          return null;
+        }
+
+        const user = await prisma.user.findUnique({
+          where: {
+            email: credentials.email.toLowerCase()
+          }
+        });
+
+        if (!user) {
+          return null;
+        }
+
+        // Verificar se o email foi confirmado
+        if (!user.emailVerified) {
+          throw new Error("Por favor, confirme seu email antes de fazer login.");
+        }
+
+        // Verificar senha
+        const isPasswordValid = await compare(credentials.password, user.password!);
+
+        if (!isPasswordValid) {
+          return null;
+        }
+
+        return {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          username: user.username || undefined,
+        };
+      }
     }),
-    // EmailProvider removido temporariamente - requer adapter
+    EmailProvider({
+      server: {
+        host: process.env.EMAIL_SERVER_HOST,
+        port: parseInt(process.env.EMAIL_SERVER_PORT || "587"),
+        auth: {
+          user: process.env.EMAIL_SERVER_USER,
+          pass: process.env.EMAIL_SERVER_PASSWORD,
+        },
+      },
+      from: process.env.EMAIL_FROM || "Crônicas do Japão Feudal <cronicasdojapaofeudal@gmail.com>",
+      sendVerificationRequest,
+    })
   ],
   pages: {
     signIn: "/auth/signin",
@@ -33,6 +82,7 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
         token.uid = user.id
+        token.username = user.username
       }
       return token
     },

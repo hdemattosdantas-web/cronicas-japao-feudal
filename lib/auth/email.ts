@@ -12,7 +12,7 @@ export async function sendVerificationRequest(params: SendVerificationRequestPar
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: provider.from,
+      from: provider.from || 'Crônicas do Japão Feudal <cronicasdojapaofeudal@gmail.com>',
       to: identifier,
       subject: `🏯 Entre no mundo de Crônicas do Japão Feudal`,
       html: html({ url, host, theme }),

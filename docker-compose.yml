@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: cronicas_japao_feudal_postgres
+    environment:
+      POSTGRES_USER: cronicas
+      POSTGRES_PASSWORD: cronicas123
+      POSTGRES_DB: cronicas_japao_feudal
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cronicas"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:

@@ -541,3 +541,81 @@ input:focus, select:focus, textarea:focus {
     padding: 1rem;
   }
 }
+
+/* ===================================================
+   ANIMAÇÕES E EFEITOS ESPECIAIS
+   =================================================== */
+
+/* Animação de entrada das notificações */
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s ease-out;
+}
+
+/* Animação de brilho para conquistas */
+@keyframes achievement-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(160, 139, 92, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(160, 139, 92, 0.6), 0 0 30px rgba(160, 139, 92, 0.4);
+  }
+}
+
+.achievement-glow {
+  animation: achievement-glow 2s ease-in-out infinite;
+}
+
+/* Animação de pulso suave */
+@keyframes soft-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-soft-pulse {
+  animation: soft-pulse 3s ease-in-out infinite;
+}
+
+/* Efeito de hover para cards históricos */
+.card-historical {
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-dark);
+}
+
+.card-historical:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--shadow-primary);
+  border-color: var(--gold-dulled);
+}
+
+/* Animação para progresso das conquistas */
+@keyframes progress-fill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: var(--progress-width);
+  }
+}
+
+.progress-bar-animated {
+  animation: progress-fill 1.5s ease-out forwards;
+}
+
+/* ===================================================
+   FIM DO ARQUIVO
+   =================================================== */

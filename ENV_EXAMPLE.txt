@@ -1,0 +1,93 @@
+# =================================================================
+# CRÔNICAS DO JAPÃO FEUDAL - VARIÁVEIS DE AMBIENTE
+# =================================================================
+
+# =================================================================
+# AUTENTICAÇÃO E BANCO DE DADOS
+# =================================================================
+
+# NextAuth Configuration
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=sua_chave_secreta_super_segura_aqui
+
+# Google OAuth
+GOOGLE_CLIENT_ID=seu_google_client_id.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=seu_google_client_secret
+
+# Database
+DATABASE_URL="file:./prisma/dev.db"
+
+# =================================================================
+# CONFIGURAÇÃO DE EMAIL
+# =================================================================
+
+# Email Principal do Jogo
+EMAIL_FROM=Crônicas do Japão Feudal <cronicasdojapaofeudal@gmail.com>
+
+# Opção 1: Gmail SMTP (Recomendado para começar)
+EMAIL_SERVER_HOST=smtp.gmail.com
+EMAIL_SERVER_PORT=587
+EMAIL_SERVER_USER=cronicasdojapaofeudal@gmail.com
+EMAIL_SERVER_PASSWORD=SUA_SENHA_DE_APP_DO_GMAIL
+
+# Opção 2: Resend (Mais profissional, pago)
+RESEND_API_KEY=re_XXXXXXXXXXXXXXXXXXXXXXXXXX
+
+# =================================================================
+# VARIÁVEIS DE PRODUÇÃO (VERCEL)
+# =================================================================
+
+# Para produção, configure essas variáveis no Vercel Dashboard:
+# Project Settings → Environment Variables
+
+# Produção - NextAuth
+# NEXTAUTH_URL=https://cronicas-japao-feudal-teste.vercel.app
+# NEXTAUTH_SECRET=gerar_uma_nova_chave_segura
+
+# Produção - Database (Railway/PostgreSQL)
+# DATABASE_URL=postgresql://user:password@host:port/database
+
+# Produção - Email (usar apenas uma opção)
+# EMAIL_FROM=Crônicas do Japão Feudal <cronicasdojapaofeudal@gmail.com>
+# EMAIL_SERVER_HOST=smtp.gmail.com
+# EMAIL_SERVER_PORT=587
+# EMAIL_SERVER_USER=cronicasdojapaofeudal@gmail.com
+# EMAIL_SERVER_PASSWORD=SUA_SENHA_DE_APP_DO_GMAIL
+
+# =================================================================
+# INSTRUÇÕES DE CONFIGURAÇÃO
+# =================================================================
+
+# 1. COPIAR ESTE ARQUIVO:
+#    cp ENV_EXAMPLE.txt .env.local
+
+# 2. PREENCHER AS VARIÁVEIS:
+#    - NEXTAUTH_SECRET: Gerar uma chave segura (pode usar: openssl rand -base64 32)
+#    - GOOGLE_CLIENT_ID/SECRET: Obter no Google Cloud Console
+#    - EMAIL_SERVER_PASSWORD: Gerar App Password no Gmail
+
+# 3. PARA PRODUÇÃO:
+#    - Configurar variáveis no Vercel Dashboard
+#    - Usar URLs de produção
+#    - Configurar banco PostgreSQL
+
+# 4. TESTAR:
+#    npm run dev
+#    npm run build
+
+# =================================================================
+# SUPORTE E LINKS ÚTEIS
+# =================================================================
+
+# Google Cloud Console: https://console.cloud.google.com/
+# Gmail App Passwords: https://support.google.com/accounts/answer/185833
+# Resend: https://resend.com/
+# Railway: https://railway.app/
+# Vercel: https://vercel.com/
+
+# =================================================================
+# CONTATO
+# =================================================================
+
+# Email: cronicasdojapaofeudal@gmail.com
+# Suporte técnico: Entre em contato para ajuda com configuração

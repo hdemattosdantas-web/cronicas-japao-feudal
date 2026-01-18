@@ -165,6 +165,21 @@ export default function CharactersPage() {
                       🎮 Jogar
                     </button>
                   </Link>
+                  <Link href={`/characters/${character.id}/inventory`} className="flex-1">
+                    <button
+                      className="w-full"
+                      style={{
+                        background: '#d4af37',
+                        border: 'none',
+                        color: 'white',
+                        padding: '8px',
+                        borderRadius: '6px',
+                        fontSize: '14px'
+                      }}
+                    >
+                      🎒 Inventário
+                    </button>
+                  </Link>
                   <button
                     className="px-3 py-1 text-sm"
                     style={{

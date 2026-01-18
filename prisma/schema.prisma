@@ -6,27 +6,32 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
-// NextAuth.js Models
+// ===================================================
+// NextAuth.js Models (Required for authentication)
+// ===================================================
+
 model Account {
   id                String  @id @default(cuid())
   userId            String
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String?
-  access_token      String?
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String?
+  id_token          String? @db.Text
   session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@index([userId])
 }
 
 model Session {
@@ -35,6 +40,8 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model User {
@@ -48,14 +55,39 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
+  // NextAuth relations
   accounts      Account[]
   sessions      Session[]
+
+  // Game relations
   characters    Character[]
+  achievements  UserAchievement[]
+
+  // Social relations
   friendRequestsSent   FriendRequest[] @relation("FriendRequestSender")
   friendRequestsReceived FriendRequest[] @relation("FriendRequestReceiver")
   friendshipsAsUser Friend[] @relation("FriendUser")
   friendshipsAsFriend Friend[] @relation("FriendFriend")
+
+  // Chat relations
+  chatParticipants ChatParticipant[]
+  chatMessages     ChatMessage[]
+
+  @@index([email])
+  @@index([username])
 }
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ===================================================
+// Social System
+// ===================================================
 
 model FriendRequest {
   id          String   @id @default(cuid())
@@ -69,6 +101,8 @@ model FriendRequest {
   receiver    User     @relation("FriendRequestReceiver", fields: [receiverId], references: [id], onDelete: Cascade)
 
   @@unique([senderId, receiverId])
+  @@index([senderId])
+  @@index([receiverId])
 }
 
 model Friend {
@@ -81,17 +115,14 @@ model Friend {
   friend      User     @relation("FriendFriend", fields: [friendId], references: [id], onDelete: Cascade)
 
   @@unique([userId, friendId])
+  @@index([userId])
+  @@index([friendId])
 }
 
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
-
-  @@unique([identifier, token])
-}
-
+// ===================================================
 // Game Models
+// ===================================================
+
 model Character {
   id          String   @id @default(cuid())
   userId      String
@@ -99,14 +130,208 @@ model Character {
   age         Int
   origin      String
   profession  String
-  lore        String
-  attributes  String   // JSON string com atributos calculados
+  lore        String   @db.Text
   level       Int      @default(1)
   experience  Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
+  // Relations
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  attributes  Attributes?
+  inventory   Inventory?
+  parentCharacterId String? // Para sistema de herança/legado
+  parentCharacter   Character? @relation("CharacterLegacy", fields: [parentCharacterId], references: [id])
+  childCharacters    Character[] @relation("CharacterLegacy")
 
   @@index([userId])
+  @@index([parentCharacterId])
+}
+
+model Attributes {
+  id          String   @id @default(cuid())
+  characterId String  @unique
+  character   Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
+
+  // Atributos físicos
+  body        Int      @default(5)
+  strength    Int      @default(5)
+  agility     Int      @default(5)
+
+  // Atributos mentais
+  intellect   Int      @default(5)
+  willpower   Int      @default(5)
+  perception  Int      @default(5)
+
+  // Atributos sociais
+  socialPerception Int  @default(5)
+
+  // Atributos espirituais (ocultos)
+  spiritualPerception Int @default(0)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([characterId])
+}
+
+// ===================================================
+// Achievement System
+// ===================================================
+
+model Achievement {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  description String   @db.Text
+  icon        String?
+  category    String   // life_daily, exploration, mundane_conflicts, supernatural, knowledge_occultism, legacy_heritage, secret_classes
+  type        String   @default("automatic") // automatic, manual
+  hidden      Boolean  @default(false)
+  rare        Boolean  @default(false)
+  requirements Json    // condições para desbloquear
+  reward      Json?    // recompensa (exp, items, etc)
+  createdAt   DateTime @default(now())
+
+  userAchievements UserAchievement[]
+
+  @@index([category])
+  @@index([type])
+}
+
+model UserAchievement {
+  id            String   @id @default(cuid())
+  userId        String
+  achievementId String
+  unlockedAt    DateTime @default(now())
+  progress      Int      @default(0) // progresso atual
+  maxProgress   Int      @default(0) // progresso máximo necessário
+  isCompleted   Boolean  @default(false)
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievement Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, achievementId])
+  @@index([userId])
+  @@index([achievementId])
+  @@index([isCompleted])
+}
+
+// ===================================================
+// Chat System
+// ===================================================
+
+model ChatRoom {
+  id          String   @id @default(cuid())
+  name        String?
+  type        String   @default("direct") // direct, group, campaign
+  campaignId  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  messages    ChatMessage[]
+  participants ChatParticipant[]
+
+  @@index([campaignId])
+  @@index([type])
+}
+
+model ChatParticipant {
+  id          String   @id @default(cuid())
+  roomId      String
+  userId      String
+  joinedAt    DateTime @default(now())
+  role        String   @default("member") // member, admin
+
+  room        ChatRoom @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([roomId, userId])
+  @@index([userId])
+  @@index([roomId])
+}
+
+model ChatMessage {
+  id          String   @id @default(cuid())
+  roomId      String
+  userId      String
+  content     String   @db.Text
+  messageType String   @default("text") // text, image, system
+  createdAt   DateTime @default(now())
+
+  room        ChatRoom @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([roomId])
+  @@index([userId])
+  @@index([createdAt])
+}
+
+// ===================================================
+// Inventory System
+// ===================================================
+
+model Item {
+  id          String   @id @default(cuid())
+  name        String
+  description String   @db.Text
+  category    String   // weapon, armor, tool, consumable, material, treasure, special
+  type        String   // sword, bow, staff, armor, potion, food, etc.
+  weight      Float    @default(0.1) // em kg
+  size        String   @default("pequeno") // pequeno, medio, grande, enorme
+  value       Int      @default(0) // valor em moedas
+  rarity      String   @default("comum") // comum, incomum, raro, epico, legendario
+  properties  Json?    // propriedades especiais (dano, defesa, efeitos, etc)
+  requirements Json?   // requisitos para usar (nivel, atributos, profissão, etc)
+  isStackable Boolean @default(true)
+  maxStack    Int      @default(99)
+  icon        String?
+  professionSpecific String? // profissão específica para este item
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  inventorySlots InventorySlot[]
+
+  @@index([category])
+  @@index([type])
+  @@index([rarity])
+  @@index([professionSpecific])
+}
+
+model Inventory {
+  id          String   @id @default(cuid())
+  characterId String   @unique
+  character   Character @relation(fields: [characterId], references: [id], onDelete: Cascade)
+  
+  maxWeight   Float    @default(30.0) // capacidade máxima em kg
+  maxSlots    Int      @default(20)   // número máximo de slots
+  currentWeight Float  @default(0.0)  // peso atual
+  usedSlots   Int      @default(0)    // slots utilizados
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  slots       InventorySlot[]
+
+  @@index([characterId])
+}
+
+model InventorySlot {
+  id          String   @id @default(cuid())
+  inventoryId String
+  inventory   Inventory @relation(fields: [inventoryId], references: [id], onDelete: Cascade)
+  itemId      String
+  item        Item      @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  
+  quantity    Int      @default(1)
+  slotPosition Int      // posição no inventário (1-20)
+  isEquipped  Boolean  @default(false)
+  equippedSlot String?  // slot de equipamento (main_hand, off_hand, armor, etc)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([inventoryId, slotPosition])
+  @@index([inventoryId])
+  @@index([itemId])
 }

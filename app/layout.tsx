@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import { SessionProvider } from "./components/SessionProvider";
 import { UsernameWrapper } from "./components/UsernameWrapper";
+import { Analytics } from "./components/Analytics";
+import { NotificationProvider } from "./components/NotificationProvider";
+import { FloatingAchievementButton } from "./components/FloatingAchievementButton";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -36,7 +39,9 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <SessionProvider session={session}>
-          <UsernameWrapper>
+          <Analytics />
+          <NotificationProvider>
+            <UsernameWrapper>
             <header className="header-overlay">
               <div className="container py-4">
                 <div className="flex items-center justify-between">
@@ -59,11 +64,20 @@ export default async function RootLayout({
                         <Link href="/friends" className="nav-link">
                           👥 Amigos
                         </Link>
+                        <Link href="/chat" className="nav-link">
+                          💬 Chat
+                        </Link>
+                        <Link href="/achievements" className="nav-link">
+                          🏆 Conquistas
+                        </Link>
                         <Link href="/rooms" className="nav-link">
                           🏰 Salas
                         </Link>
                         <Link href="/characters" className="nav-link">
                           🏯 Personagens
+                        </Link>
+                        <Link href="/settings" className="nav-link">
+                          ⚙️ Configurações
                         </Link>
                         <Link href="/character/create" className="nav-link">
                           🎭 Criar
@@ -86,6 +100,8 @@ export default async function RootLayout({
               {children}
             </main>
 
+            <FloatingAchievementButton />
+
             <footer className="footer-overlay mt-12">
               <div className="container py-6 text-center interface-small">
                 <p>🎌 Sistema de RPG de Vida • Japão Feudal • Progressão Orgânica</p>
@@ -93,6 +109,7 @@ export default async function RootLayout({
               </div>
             </footer>
           </UsernameWrapper>
+          </NotificationProvider>
         </SessionProvider>
       </body>
     </html>

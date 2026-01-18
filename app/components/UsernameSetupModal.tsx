@@ -30,13 +30,36 @@ export function UsernameSetupModal({ onComplete }: UsernameSetupModalProps) {
       return
     }
 
-    try {
-      // TODO: Salvar username no backend quando o banco estiver funcionando
-      // Por enquanto, vamos apenas simular e fechar o modal
-      console.log("Username definido:", username)
+    if (username.length > 20) {
+      setError("Nome de usuário deve ter no máximo 20 caracteres")
+      setIsLoading(false)
+      return
+    }
 
-      // Simular delay
-      await new Promise(resolve => setTimeout(resolve, 1000))
+    if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+      setError("Nome de usuário deve conter apenas letras, números e underscores")
+      setIsLoading(false)
+      return
+    }
+
+    try {
+      const response = await fetch('/api/username', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username: username.trim() })
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        setError(data.error || 'Erro ao salvar nome de usuário')
+        return
+      }
+
+      // Atualizar a sessão para incluir o username
+      await new Promise(resolve => setTimeout(resolve, 500))
 
       onComplete()
     } catch (error) {

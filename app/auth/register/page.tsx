@@ -71,15 +71,27 @@ export default function RegisterPage() {
     }
 
     try {
-      // TODO: Implementar registro no backend quando banco estiver funcionando
-      // Por enquanto, simular registro e redirecionar para login
-      console.log("Dados de registro:", formData)
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          username: formData.username.trim(),
+          email: formData.email.trim(),
+          password: formData.password,
+        }),
+      })
 
-      // Simular delay
-      await new Promise(resolve => setTimeout(resolve, 1000))
+      const data = await response.json()
 
-      alert("✅ Conta criada com sucesso! Faça login para continuar.")
-      router.push("/auth/signin")
+      if (response.ok) {
+        alert("✅ " + data.message)
+        router.push("/auth/signin")
+      } else {
+        setError(data.error || "Erro ao criar conta")
+      }
 
     } catch (error) {
       setError("Erro ao criar conta. Tente novamente.")

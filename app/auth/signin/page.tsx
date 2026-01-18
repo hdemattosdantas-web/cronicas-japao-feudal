@@ -43,7 +43,7 @@ export default async function SignInPage() {
           <p>
             <strong>🎭 Sobre a Autenticação:</strong><br />
             Seus dados são protegidos e criptografados. Você pode fazer login com sua conta Google
-            ou receber um link mágico por email (sem senha necessária).
+            ou usar email e senha cadastrados.
           </p>
         </div>
       </div>
