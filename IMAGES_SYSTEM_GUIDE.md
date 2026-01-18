@@ -1,4 +1,4 @@
-# 🎨 Sistema de Imagens - Mesa Feudal
+# 🎨 Sistema de Imagens - Crônicas do Japão
 
 ## Visão Geral
 
@@ -254,4 +254,4 @@ Depois: Avatar circular customizável
 
 ---
 
-**O sistema de imagens transforma Mesa Feudal de texto puro para uma experiência verdadeiramente imersiva, com atmosfera visual rica e personalização de personagens!** 🎨🖼️⚔️
+**O sistema de imagens transforma Crônicas do Japão de texto puro para uma experiência verdadeiramente imersiva, com atmosfera visual rica e personalização de personagens!** 🎨🖼️⚔️

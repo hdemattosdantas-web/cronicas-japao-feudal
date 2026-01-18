@@ -1,9 +1,9 @@
-// MANIFESTO DO MUNDO - Mesa Feudal
+// MANIFESTO DO MUNDO - Crônicas do Japão
 // Base conceitual usada pela IA e sistemas do jogo
 
 export const WORLD_MANIFESTO = {
   corePhilosophy: `
-O mundo de Mesa Feudal não gira em torno do jogador.
+O mundo de Crônicas do Japão não gira em torno do jogador.
 
 As estradas existiam antes dele.
 As vilas sobreviverão depois.
@@ -23,7 +23,7 @@ Conhecimento é perigoso.
 Sobrevivência é mérito.
 Despertar tem um preço.
 
-Em Mesa Feudal, ninguém escolhe ser especial.
+Em Crônicas do Japão, ninguém escolhe ser especial.
 Alguns apenas sobrevivem tempo suficiente para se tornar.
 `,
 

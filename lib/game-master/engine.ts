@@ -155,7 +155,7 @@ export class GameMasterEngine {
         messages: [
           {
             role: 'system',
-            content: `Você é o Game Master em Mesa Feudal, um RPG narrativo no Japão feudal.
+            content: `Você é o Game Master em Crônicas do Japão, um RPG narrativo no Japão feudal.
 
 ${getWorldManifestoPrompt()}
 

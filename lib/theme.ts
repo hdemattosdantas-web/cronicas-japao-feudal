@@ -1,5 +1,5 @@
 /**
- * Theme Provider para Mesa Feudal
+ * Theme Provider para Crônicas do Japão
  * Define cores, tipografia e configurações visuais consistentes
  */
 

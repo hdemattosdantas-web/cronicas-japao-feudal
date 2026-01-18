@@ -32,7 +32,7 @@ export default function Home() {
 
             <div className="space-y-6 max-w-4xl mx-auto">
               <p className="narrative-body">
-                <strong className="font-title text-gold">Mesa Feudal</strong> é um RPG narrativo ambientado em um Japão feudal alternativo,
+                <strong className="font-title text-gold">Crônicas do Japão</strong> é um RPG narrativo ambientado em um Japão feudal alternativo,
                 onde a vida cotidiana, o perigo humano e o sobrenatural coexistem em silêncio.
               </p>
 
@@ -53,7 +53,7 @@ export default function Home() {
               onClick={handleStartJourney}
               className="btn-primary block mx-auto"
             >
-              🏮 Começar Jornada
+              🏮 Comece sua Jornada
             </button>
 
             <p className="narrative-italic text-center">
@@ -61,7 +61,7 @@ export default function Home() {
             </p>
 
             <div className="text-center">
-              <span className="interface-small">Já é aventureiro? </span>
+              <span className="interface-small">Já é um habitante do Japão? </span>
               <button
                 onClick={() => window.location.href = '/auth/signin'}
                 className="text-gold hover:underline"

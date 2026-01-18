@@ -1,4 +1,4 @@
-# 📜 Manifesto do Mundo & Onboarding - Mesa Feudal
+# 📜 Manifesto do Mundo & Onboarding - Crônicas do Japão
 
 ## 🎭 Visão Geral
 
@@ -30,7 +30,7 @@ Conhecimento é perigoso.
 Sobrevivência é mérito.
 Despertar tem um preço.
 
-Em Mesa Feudal, ninguém escolhe ser especial.
+Em Crônicas do Japão, ninguém escolhe ser especial.
 Alguns apenas sobrevivem tempo suficiente para se tornar.
 ```
 
@@ -145,7 +145,7 @@ const steps = [
 ```typescript
 // Prompt da IA inclui manifesto
 content: `
-Você é o Game Master em Mesa Feudal...
+Você é o Game Master em Crônicas do Japão...
 
 ${getWorldManifestoPrompt()}
 
@@ -191,4 +191,4 @@ O onboarding e manifesto criam uma **experiência filosófica coesa** onde:
 
 ---
 
-**O manifesto e onboarding transformam "Mesa Feudal" de um simples jogo em uma experiência filosófica profunda sobre sobrevivência, conhecimento perigoso e a indiferença do universo!** 🌑📜⚔️
+**O manifesto e onboarding transformam "Crônicas do Japão" de um simples jogo em uma experiência filosófica profunda sobre sobrevivência, conhecimento perigoso e a indiferença do universo!** 🌑📜⚔️

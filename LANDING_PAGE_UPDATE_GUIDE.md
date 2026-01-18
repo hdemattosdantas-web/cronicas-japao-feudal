@@ -159,4 +159,4 @@ Onboarding → Manifesto Filosófico → Criação de Personagem
 
 ---
 
-**A nova seção transforma a página inicial de mera apresentação em um portal atmosférico para o mundo sombrio de Mesa Feudal!** 🕯️🌑📜
+**A nova seção transforma a página inicial de mera apresentação em um portal atmosférico para o mundo sombrio de Crônicas do Japão!** 🕯️🌑📜

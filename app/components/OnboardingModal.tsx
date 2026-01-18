@@ -59,7 +59,7 @@ e aquilo que você será capaz de perceber.`
         {/* Header */}
         <div className="p-6 border-b border-gray-700">
           <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-bold text-white">Mesa Feudal</h2>
+            <h2 className="text-2xl font-bold text-white">Crônicas do Japão</h2>
             <button
               onClick={onClose}
               className="text-gray-400 hover:text-white text-xl"
