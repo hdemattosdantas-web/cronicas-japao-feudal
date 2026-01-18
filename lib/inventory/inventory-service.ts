@@ -1,6 +1,51 @@
 import { prisma } from '@/lib/prisma'
-import { Item, Inventory, InventorySlot, ItemSizeConfig, EquipmentSlots } from '@/types/inventory'
 import { getInitialItems, getInventoryCapacity } from './items-data'
+import { ItemSizeConfig, EquipmentSlots } from '@/types/inventory'
+
+interface Item {
+  id: string
+  name: string
+  description: string
+  category: string
+  type: string
+  weight: number
+  size: string
+  value: number
+  rarity: string
+  properties?: any
+  requirements?: any
+  isStackable: boolean
+  maxStack: number
+  icon?: string
+  professionSpecific?: string
+  createdAt: Date
+  updatedAt: Date
+}
+
+interface Inventory {
+  id: string
+  characterId: string
+  maxWeight: number
+  maxSlots: number
+  currentWeight: number
+  usedSlots: number
+  createdAt: Date
+  updatedAt: Date
+  slots?: InventorySlot[]
+}
+
+interface InventorySlot {
+  id: string
+  inventoryId: string
+  itemId: string
+  item?: Item
+  quantity: number
+  slotPosition: number
+  isEquipped: boolean
+  equippedSlot: string | null
+  createdAt: Date
+  updatedAt: Date
+}
 
 export class InventoryService {
   // Criar inventário para um personagem
@@ -215,11 +260,11 @@ export class InventoryService {
   }
 
   // Verificar se item pode ser equipado em determinado slot
-  private static canEquipInSlot(item: Item, equipmentSlot: string): boolean {
+  private static canEquipInSlot(item: Item, equippedSlot: string | null): boolean {
     const category = item.category
     const type = item.type
 
-    switch (equipmentSlot) {
+    switch (equippedSlot) {
       case EquipmentSlots.MAIN_HAND:
         return category === 'weapon' && ['sword', 'short_sword', 'staff', 'knife', 'wakizashi', 'walking_staff', 'war_scythe'].includes(type)
       

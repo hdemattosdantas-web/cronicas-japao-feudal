@@ -6,7 +6,7 @@ import { InventoryService } from '@/lib/inventory/inventory-service'
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { characterId: string } }
+  { params }: { params: Promise<{ characterId: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions)
@@ -14,7 +14,7 @@ export async function GET(
       return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
     }
 
-    const characterId = params.characterId
+    const { characterId } = await params
 
     // Verificar se o personagem pertence ao usuário
     const character = await prisma.character.findFirst({
