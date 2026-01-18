@@ -56,10 +56,10 @@ export const authOptions: NextAuthOptions = {
         port: parseInt(process.env.EMAIL_SERVER_PORT || "587"),
         auth: {
           user: process.env.EMAIL_SERVER_USER,
-          pass: process.env.EMAIL_SERVER_PASSWORD || "qnmb wwej gtnm ixxj", // Senha temporária fornecida
+          pass: process.env.EMAIL_SERVER_PASSWORD,
         },
       },
-      from: process.env.EMAIL_FROM || "Crônicas do Japão Feudal <cronicasdojapaofeudal@gmail.com>",
+      from: process.env.EMAIL_FROM || "Crônicas do Japão <cronicas@japao-feudal.com>",
       sendVerificationRequest,
     })
   ],
