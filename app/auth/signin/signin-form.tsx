@@ -7,7 +7,7 @@ import Link from "next/link"
 
 export function SignInForm() {
   const [formData, setFormData] = useState({
-    email: "",
+    username: "",
     password: ""
   })
   const [isLoading, setIsLoading] = useState(false)
@@ -26,7 +26,7 @@ export function SignInForm() {
 
     try {
       const result = await signIn("credentials", {
-        email: formData.email,
+        username: formData.username,
         password: formData.password,
         redirect: false,
       })
@@ -47,18 +47,18 @@ export function SignInForm() {
 
   return (
     <div className="space-y-6">
-      {/* Formulário de Login por Email e Senha */}
+      {/* Formulário de Login por Nome de Usuário e Senha */}
       <form onSubmit={handleCredentialsSignIn} className="space-y-4">
         <div>
           <label className="block text-sm font-semibold mb-2">
-            📧 Email
+            📛 Nome de Usuário
           </label>
           <input
-            type="email"
-            name="email"
-            value={formData.email}
+            type="text"
+            name="username"
+            value={formData.username}
             onChange={handleInputChange}
-            placeholder="seu@email.com"
+            placeholder="seu_usuario"
             required
             className="w-full"
             disabled={isLoading}
@@ -83,11 +83,11 @@ export function SignInForm() {
 
         <button
           type="submit"
-          disabled={isLoading || !formData.email || !formData.password}
+          disabled={isLoading || !formData.username || !formData.password}
           className="w-full"
           style={{
-            opacity: (isLoading || !formData.email || !formData.password) ? 0.7 : 1,
-            cursor: (isLoading || !formData.email || !formData.password) ? 'not-allowed' : 'pointer'
+            opacity: (isLoading || !formData.username || !formData.password) ? 0.7 : 1,
+            cursor: (isLoading || !formData.username || !formData.password) ? 'not-allowed' : 'pointer'
           }}
         >
           {isLoading ? '🚪 Entrando...' : '🚪 Entrar'}
