@@ -1,0 +1,25 @@
+# 🗄️ BANCO DE DADOS FIREBASE (CONFIGURADO)
+# Firebase configurado via lib/firebase.ts
+
+# 📧 EMAIL (RESEND - PROFISSIONAL)
+EMAIL_SERVER_HOST=smtp.resend.com
+EMAIL_SERVER_PORT=587
+EMAIL_SERVER_USER=resend
+EMAIL_SERVER_PASSWORD=re_cwc6nmey_E8GUVDRtTsAR5kfN2PzJekXa
+EMAIL_FROM=Crônicas do Japão <cronicas@japao-feudal.com>
+
+# 🔐 AUTENTICAÇÃO
+NEXTAUTH_SECRET=HvYgzhcCfrqtV8vVx+BDF6qHpMjqGayj7O3JxBIQRKE=
+NEXTAUTH_URL=http://localhost:3000
+
+# 🤖 OPENAI
+OPENAI_API_KEY=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
+
+# 📝 ANOTAÇÕES:
+# ✅ Firebase: Configurado e funcionando
+# ✅ Firestore: Database NoSQL configurado
+# ✅ Firebase Auth: Sistema de autenticação configurado
+# ✅ Resend API: Configurado e funcionando
+# ✅ OpenAI: Configurado
+# ✅ NextAuth: Configurado com Firebase
+# 🚀 Pronto para usar!

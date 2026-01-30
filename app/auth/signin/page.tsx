@@ -1,50 +1,65 @@
-import { getServerSession } from "next-auth/next"
-import { redirect } from "next/navigation"
-import Link from "next/link"
-import { SignInForm } from "./signin-form"
-
-export default async function SignInPage() {
-  const session = await getServerSession()
-
-  if (session) {
-    redirect("/")
-  }
-
+﻿export default function SignInPage() {
   return (
-    <div className="container fade-in">
-      <div className="card" style={{ maxWidth: '500px', margin: '40px auto' }}>
-        <div className="text-center mb-6">
-          <h1 className="text-3xl font-bold" style={{ color: 'var(--accent)' }}>
-            🏯 Entrar no Mundo Feudal
-          </h1>
-          <p className="text-sm opacity-70 mt-2">
-            Faça login para salvar seus personagens e continuar suas campanhas
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="max-w-md w-full space-y-8">
+        <div>
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            Cronicas do Japao Feudal
+          </h2>
+          <p className="mt-2 text-center text-sm text-gray-600">
+            Entre na sua aventura
           </p>
         </div>
+        
+        <form className="mt-8 space-y-6">
+          <div className="space-y-4">
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                Email
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                className="mt-1 appearance-none block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                placeholder="seu@email.com"
+              />
+            </div>
+            
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                Senha
+              </label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                required
+                className="mt-1 appearance-none block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                placeholder=""
+              />
+            </div>
+          </div>
 
-        <SignInForm />
-
-        <div className="mt-6 text-center">
-          <Link href="/">
-            <button style={{
-              background: 'transparent',
-              border: '2px solid var(--border)',
-              color: 'var(--foreground)',
-              padding: '8px 16px',
-              borderRadius: '6px',
-              fontSize: '14px'
-            }}>
-              ← Voltar ao Início
+          <div>
+            <button
+              type="submit"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Entrar
             </button>
-          </Link>
-        </div>
+          </div>
 
-        <div className="mt-6 p-4 rounded-lg text-xs opacity-60" style={{ backgroundColor: 'rgba(139, 69, 19, 0.05)' }}>
-          <p>
-            <strong>🎭 Sobre a Autenticação:</strong><br />
-            Seus dados são protegidos e criptografados. Faça login usando seu nome de usuário e senha cadastrados.
-          </p>
-        </div>
+          <div className="text-center">
+            <a
+              href="/auth/register"
+              className="font-medium text-indigo-600 hover:text-indigo-500"
+            >
+              Nao tem uma conta? Registre-se
+            </a>
+          </div>
+        </form>
       </div>
     </div>
   )

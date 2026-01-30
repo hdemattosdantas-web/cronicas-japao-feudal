@@ -1,117 +1,139 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import Link from "next/link";
-import { SessionProvider } from "./components/SessionProvider";
-import { UsernameWrapper } from "./components/UsernameWrapper";
-import { Analytics } from "./components/Analytics";
-import { NotificationProvider } from "./components/NotificationProvider";
-import { FloatingAchievementButton } from "./components/FloatingAchievementButton";
-import "./globals.css";
+﻿import type { Metadata } from "next"
+import { Geist, Geist_Mono } from "next/font/google"
+import Link from "next/link"
+import { AuthProvider } from "@/components/AuthProvider"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-});
+})
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
-});
+})
 
 export const metadata: Metadata = {
-  title: "Crônicas do Japão Feudal - RPG de Vida",
-  description: "Um RPG de vida ambientado no Japão feudal onde histórias humanas se cruzam com o oculto",
-};
+  title: "Cronicas do Japao Feudal - RPG de Vida",
+  description: "Um RPG de vida ambientado no Japao feudal onde historias humanas se cruzam com o oculto",
+}
 
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "@/lib/auth/config"
-
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession(authOptions)
-
   return (
     <html lang="pt-BR">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        style={{
+          fontFamily: "Arial, sans-serif",
+          margin: 0,
+          padding: 0,
+          backgroundColor: "#f9fafb"
+        }}
       >
-        <SessionProvider session={session}>
-          <Analytics />
-          <NotificationProvider>
-            <UsernameWrapper>
-            <header className="header-overlay">
-              <div className="container py-4">
-                <div className="flex items-center justify-between">
-                  <Link href="/" className="flex items-center space-x-3 nav-link">
-                    <span className="text-2xl">🏯</span>
-                    <div>
-                      <h1 className="text-lg font-bold" style={{ color: 'var(--text-gold)' }}>
-                        Crônicas do Japão Feudal
-                      </h1>
-                      <p className="text-xs opacity-80 interface-small">RPG de Vida • Japão Sengoku</p>
-                    </div>
+        <AuthProvider>
+          <header style={{
+          backgroundColor: "#1a1a1a",
+          color: "white",
+          padding: "16px 0"
+        }}>
+            <div style={{
+              maxWidth: "1200px",
+              margin: "0 auto",
+              padding: "0 20px"
+            }}>
+              <div style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between"
+              }}>
+                <Link href="/" style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "12px",
+                  color: "#fbbf24",
+                  textDecoration: "none"
+                }}>
+                  <span style={{ fontSize: "24px" }}></span>
+                  <div>
+                    <h1 style={{
+                      fontSize: "18px",
+                      fontWeight: "bold",
+                      margin: 0,
+                      color: "#fbbf24"
+                    }}>
+                      Cronicas do Japao Feudal
+                    </h1>
+                    <p style={{
+                      fontSize: "12px",
+                      opacity: 0.8,
+                      margin: 0
+                    }}>
+                      RPG de Vida
+                    </p>
+                  </div>
+                </Link>
+
+                <nav style={{
+                  display: "none",
+                  gap: "24px"
+                }} className="md:flex">
+                  <Link href="/" style={{
+                    color: "#fbbf24",
+                    textDecoration: "none",
+                    padding: "8px 16px",
+                    borderRadius: "4px",
+                    transition: "background-color 0.2s"
+                  }}>
+                    Inicio
                   </Link>
-
-                  <nav className="hidden md:flex space-x-6">
-                    <Link href="/" className="nav-link">
-                      🏠 Início
-                    </Link>
-                    {session ? (
-                      <>
-                        <Link href="/friends" className="nav-link">
-                          👥 Amigos
-                        </Link>
-                        <Link href="/chat" className="nav-link">
-                          💬 Chat
-                        </Link>
-                        <Link href="/achievements" className="nav-link">
-                          🏆 Conquistas
-                        </Link>
-                        <Link href="/rooms" className="nav-link">
-                          🏰 Salas
-                        </Link>
-                        <Link href="/characters" className="nav-link">
-                          🏯 Personagens
-                        </Link>
-                        <Link href="/settings" className="nav-link">
-                          ⚙️ Configurações
-                        </Link>
-                        <Link href="/character/create" className="nav-link">
-                          🎭 Criar
-                        </Link>
-                        <span className="text-sm interface-small">
-                          Olá, {session.user?.name || session.user?.username || session.user?.email}
-                        </span>
-                      </>
-                    ) : (
-                      <Link href="/auth/signin" className="nav-link">
-                        🚪 Entrar
-                      </Link>
-                    )}
-                  </nav>
-                </div>
+                  <Link href="/auth/signin" style={{
+                    color: "#fbbf24",
+                    textDecoration: "none",
+                    padding: "8px 16px",
+                    borderRadius: "4px",
+                    transition: "background-color 0.2s"
+                  }}>
+                    Entrar
+                  </Link>
+                </nav>
               </div>
-            </header>
+            </div>
+          </header>
 
-            <main>
-              {children}
-            </main>
+          <main>
+            {children}
+          </main>
 
-            <FloatingAchievementButton />
-
-            <footer className="footer-overlay mt-12">
-              <div className="container py-6 text-center interface-small">
-                <p>🎌 Sistema de RPG de Vida • Japão Feudal • Progressão Orgânica</p>
-                <p className="mt-2">🌟 "O mundo não gira ao seu redor"</p>
-              </div>
-            </footer>
-          </UsernameWrapper>
-          </NotificationProvider>
-        </SessionProvider>
+          <footer style={{
+            backgroundColor: "#1a1a1a",
+            color: "#9ca3af",
+            borderTop: "1px solid #374151",
+            marginTop: "48px",
+            padding: "24px 0"
+          }}>
+            <div style={{
+              maxWidth: "1200px",
+              margin: "0 auto",
+              padding: "0 20px",
+              textAlign: "center"
+            }}>
+              <p style={{ fontSize: "14px", margin: 0 }}>
+                Sistema de RPG de Vida
+              </p>
+              <p style={{
+                fontSize: "14px",
+                margin: "8px 0 0 0"
+              }}>
+                "O mundo nao gira ao seu redor"
+              </p>
+            </div>
+          </footer>
+        </AuthProvider>
       </body>
     </html>
-  );
+  )
 }
