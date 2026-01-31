@@ -1,7 +1,6 @@
 ﻿import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import Link from "next/link"
-import { AuthProvider } from "@/components/AuthProvider"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,8 +33,7 @@ export default function RootLayout({
           backgroundColor: "#f9fafb"
         }}
       >
-        <AuthProvider>
-          <header style={{
+        <header style={{
           backgroundColor: "#1a1a1a",
           color: "white",
           padding: "16px 0"
@@ -132,7 +130,6 @@ export default function RootLayout({
               </p>
             </div>
           </footer>
-        </AuthProvider>
       </body>
     </html>
   )
