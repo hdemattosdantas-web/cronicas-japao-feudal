@@ -7,7 +7,6 @@ export async function POST(request: NextRequest) {
     const { email, password, action, name } = await request.json()
 
     if (action === 'register') {
-      // Registro
       if (!name?.trim()) {
         return NextResponse.json(
           { error: 'Nome é obrigatório' },
@@ -31,7 +30,6 @@ export async function POST(request: NextRequest) {
 
       const userCredential = await createUserWithEmailAndPassword(auth, email, password)
       
-      // Atualizar perfil com nome
       await userCredential.user.updateProfile({
         displayName: name
       })
@@ -47,7 +45,6 @@ export async function POST(request: NextRequest) {
     }
 
     if (action === 'login') {
-      // Login
       if (!email?.trim() || !password) {
         return NextResponse.json(
           { error: 'Email e senha são obrigatórios' },
@@ -75,7 +72,6 @@ export async function POST(request: NextRequest) {
   } catch (error: any) {
     console.error('Erro na autenticação:', error)
     
-    // Tratar erros específicos do Firebase
     let errorMessage = 'Erro interno do servidor'
     
     if (error.code === 'auth/email-already-in-use') {
