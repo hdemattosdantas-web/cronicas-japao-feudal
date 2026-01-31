@@ -13,16 +13,16 @@
         
         <div className="space-y-4">
           <a
-            href="/auth/signin"
+            href="/auth"
             className="block w-full text-center bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700"
           >
-            Entrar
+            Entrar / Registrar
           </a>
           <a
-            href="/auth/register"
-            className="block w-full text-center bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700"
+            href="/home"
+            className="block w-full text-center bg-amber-600 text-white py-2 px-4 rounded-md hover:bg-amber-700"
           >
-            Registrar
+            Dashboard
           </a>
         </div>
         
