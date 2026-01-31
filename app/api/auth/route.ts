@@ -29,10 +29,6 @@ export async function POST(request: NextRequest) {
       }
 
       const userCredential = await createUserWithEmailAndPassword(auth, email, password)
-      
-      await userCredential.user.updateProfile({
-        displayName: name
-      })
 
       return NextResponse.json({
         message: '✅ Conta criada com sucesso!',
