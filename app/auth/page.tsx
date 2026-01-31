@@ -28,14 +28,9 @@ export default function AuthPage() {
       } else {
         // Registro
         await createUserWithEmailAndPassword(auth, formData.email, formData.password)
-        if (formData.name) {
-          await auth.currentUser?.updateProfile({
-            displayName: formData.name
-          })
-        }
       }
 
-      router.push('/game')
+      router.push('/home')
     } catch (error: any) {
       let errorMessage = 'Erro na autenticação'
       
